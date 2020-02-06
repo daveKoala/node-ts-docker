@@ -1,0 +1,16 @@
+# Usual suspects
+node_modules/
+.env
+.env.*
+
+# Logs
+logs
+*.log
+.nyc_output
+
+# Compiled files
+dist/
+
+# Temporary folders
+tmp/
+temp/
