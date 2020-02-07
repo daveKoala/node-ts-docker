@@ -8,10 +8,10 @@
 docker build -t dave/node-backend .
 ```
 
-### Run
+### RUN (Docker Compose)
 
 ```
-docker run -p 8001:8080 -d dave/node-backend
+docker-compose up
 ```
 
 #### Docker notes
@@ -21,4 +21,5 @@ docker ps
 docker images
 docker logs <container id>
 docker stop <container id>
+docker exec -it <container id> /bin/bash/
 ```
