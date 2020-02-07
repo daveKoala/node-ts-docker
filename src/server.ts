@@ -1,6 +1,7 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import express from "express";
 import bodyParser from "body-parser";
+
 import { starwarsRouter } from "./services/starwars/starwars.router";
 
 const PORT = 8080;
