@@ -1,7 +1,6 @@
-
 import express, { Request, Response } from "express";
-import { checkCache } from "./starwars.middleware";
-import { findStarship } from "./starwars.service";
+import { checkCache, checkCachePerson } from "./starwars.middleware";
+import { findStarship, findPerson } from "./starwars.service";
 
 export const starwarsRouter = express.Router();
 
@@ -11,6 +10,16 @@ export const starwarsRouter = express.Router();
 starwarsRouter.get("/starships/:id", checkCache, async (req: Request, res: Response) => {
   try {
     const data = await findStarship(req.params.id);
+    return res.json({ source: "fetch", data });
+  }
+  catch (error) {
+    return res.status(500).json(error);
+  }
+});
+
+starwarsRouter.get("/people/:id", checkCachePerson, async (req: Request, res: Response) => {
+  try {
+    const data = await findPerson(req.params.id);
     return res.json({ source: "fetch", data });
   }
   catch (error) {
