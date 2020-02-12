@@ -1,17 +1,19 @@
-import redis, { RedisClient } from "redis";
+import redis from "redis";
 
 interface ITheCache { // Only Public methods
   init(url: string): void;
   fetch(query: string, cb: IRedisGetCallBack): object;
+  post(index: string, expireSeconds: number, data: object): void;
+  status: boolean | undefined;
 }
 
 interface IRedisGetCallBack {
   (err: any, data: any): void;
 }
 
-console.log();
 export class theCache implements ITheCache {
   client?: redis.RedisClient;
+  private maxRetries = 3;
 
   public init(url: string) {
     // @ts-ignore-start
@@ -20,8 +22,9 @@ export class theCache implements ITheCache {
     });
     // @ts-ignore-end
     if (this.client) {
-      this.client.on("connect", this.start);
-      this.client.on("error", this.error);
+      this.client
+        .on("connect", this.start)
+        .on("error", this.error);
     }
   }
 
@@ -45,22 +48,18 @@ export class theCache implements ITheCache {
     return this.client?.ping();
   }
 
-  retryStrategy(options: redis.RetryStrategyOptions): undefined | Error | number {
+  private retryStrategy(options: redis.RetryStrategyOptions): undefined | Error | number {
     if (options.error && options.error.code === "ECONNREFUSED") {
       // End reconnecting on a specific error and flush all commands with
       // a individual error
-      console.log("Error 1");
       return new Error("The server refused the connection");
     }
     if (options.total_retry_time > 1000 * 60 * 60) {
-      console.log("Error 2");
       return new Error("Retry time exhausted");
     }
-    if (options.attempt > 3) {
-      console.log("Error 3");
+    if (options.attempt > this.maxRetries) {
       return undefined;
     }
-    console.log("Error 4");
     return Math.min(options.attempt * 100, 3000);
   }
 
