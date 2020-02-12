@@ -11,8 +11,6 @@ const app = express();
 
 cache.init("redis://cache")
 
-console.log(cache.fetch("qwqwqwqwq"));
-
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -22,7 +20,7 @@ app.use("/starwars", starwarsRouter);
 
 // Test
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World......");
+  res.send("Hello World.");
 });
 
 app.listen(PORT, HOST);

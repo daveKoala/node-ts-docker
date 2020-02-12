@@ -7,7 +7,7 @@ export const starwarsRouter = express.Router();
 // https://itnext.io/learn-to-cache-your-nodejs-application-with-redis-in-6-minutes-745a574a9739
 // https://codewithhugo.com/setting-up-express-and-redis-with-docker-compose/
 
-starwarsRouter.get("/starships/:id", checkCache, async (req: Request, res: Response) => {
+starwarsRouter.get("/starship/:id", checkCache, async (req: Request, res: Response) => {
   try {
     const data = await findStarship(req.params.id);
     return res.json({ source: "fetch", data });

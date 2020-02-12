@@ -1,15 +1,11 @@
 import axios from "axios";
-import redis from "redis";
-
-const redis_client = redis.createClient("redis://cache");
-const CACHE_NAME = "starship";
+import { cache } from "../../lib/redis";
 
 export const findStarship = async (id: string): Promise<any> => {
   const { data } = await axios.get(
-    `https://swapi.co/api/starships/${ id }`
-  );;
-
-  redis_client.setex(`${ CACHE_NAME }:${ id }`, 60, JSON.stringify(data));
+    `https://swapi.co/api/starships/${id}`
+  );
+  cache.post(`starship:${id}`, 60, data);
 
   if (data) {
     return data;
@@ -20,10 +16,10 @@ export const findStarship = async (id: string): Promise<any> => {
 
 export const findPerson = async (id: string): Promise<any> => {
   const { data } = await axios.get(
-    `https://swapi.co/api/people/${ id }`
+    `https://swapi.co/api/people/${id}`
   );;
 
-  redis_client.setex(`person:${ id }`, 60, JSON.stringify(data));
+  cache.post(`person:${id}`, 60, data);
 
   if (data) {
     return data;
