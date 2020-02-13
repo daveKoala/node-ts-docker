@@ -3,12 +3,12 @@ version: "3.7"
 services:
   redis:
     image: "redis:alpine"
-    container_name: cache
+    container_name: ts-cache
     expose:
       - 6379
   mongo:
     image: "mongo:latest"
-    container_name: "mongodb"
+    container_name: "ts-mongodb"
     expose:
       - 27017
     environment:

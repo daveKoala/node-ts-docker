@@ -8,8 +8,8 @@ import { starwarsRouter } from "./services/starwars/starwars.router";
 
 const PORT = 8080;
 const HOST = "0.0.0.0";
-const MONGO_CONNECTION_STRING = "mongodb://mongodb/data";
-const REDIS_CONNECTION_STRING = "redis://cache";
+const MONGO_CONNECTION_STRING = "mongodb://ts-mongodb/data";
+const REDIS_CONNECTION_STRING = "redis://ts-cache";
 const app = express();
 
 cache.init(REDIS_CONNECTION_STRING);
