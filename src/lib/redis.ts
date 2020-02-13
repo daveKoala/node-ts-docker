@@ -29,7 +29,9 @@ export class theCache implements ITheCache {
   }
 
   private start() {
+    console.group();
     console.log('Redis client connected.');
+    console.groupEnd();
   }
 
   private error(error: any) {

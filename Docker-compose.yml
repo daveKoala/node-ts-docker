@@ -6,8 +6,22 @@ services:
     container_name: cache
     expose:
       - 6379
+  mongo:
+    image: "mongo:latest"
+    container_name: "mongodb"
+    expose:
+      - 27017
+    environment:
+      - MONGO_DATA_DIR=/data/db
+      - MONGO_LOG_DIR=/dev/null
+    volumes:
+      - ./data/mongodb:/data/db
+    ports:
+      - 27017:27017
+    command: mongod --smallfiles --logpath=/dev/null # --quiet
   app:
     build: .
+    container_name: "ts-server"
     volumes:
       - ./:/usr/src/app
     ports:

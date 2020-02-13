@@ -11,6 +11,9 @@ logs
 # Compiled files
 dist/
 
+# Database
+data/
+
 # Temporary folders
 tmp/
 temp/
