@@ -4,7 +4,7 @@ interface ITheCache { // Only Public methods
   init(url: string): void;
   fetch(query: string, cb: IRedisGetCallBack): object;
   post(index: string, expireSeconds: number, data: object): void;
-  status: boolean | undefined;
+  isLive: boolean | undefined;
 }
 
 interface IRedisGetCallBack {
@@ -44,7 +44,7 @@ export class theCache implements ITheCache {
     this.client?.setex(index, expireSeconds, JSON.stringify(data));
   }
 
-  get status() {
+  get isLive() {
     return this.client?.ping();
   }
 

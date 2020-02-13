@@ -5,9 +5,9 @@ import e = require('express');
 export const checkCache = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
 
-  if (cache.status) {
+  if (cache.isLive) {
 
-    cache.fetch(`starship:${id}`, (err, data) => {
+    cache.fetch(`starship:${ id }`, (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).send(err);
@@ -26,8 +26,8 @@ export const checkCache = (req: Request, res: Response, next: NextFunction) => {
 
 export const checkCachePerson = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
-  if (cache.status) {
-    cache.fetch(`person:${id}`, (err, data) => {
+  if (cache.isLive) {
+    cache.fetch(`person:${ id }`, (err, data) => {
       if (err) {
         console.log(err);
         res.status(500).send(err);
