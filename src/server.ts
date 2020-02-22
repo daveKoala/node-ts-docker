@@ -3,6 +3,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import { cache } from "./lib/redis";
 import mongoose from "mongoose";
+import cors from "cors";
+import helmet from "helmet";
+import middlewares from "./middleware";
 
 import { starwarsRouter } from "./services/starwars/starwars.router";
 
@@ -15,8 +18,11 @@ const app = express();
 cache.init(REDIS_CONNECTION_STRING);
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app
+  .use(helmet())
+  .use(cors())
+  .use(bodyParser.urlencoded({ extended: false }))
+  .use(bodyParser.json());
 
 // Routes
 app.use("/starwars", starwarsRouter);
@@ -25,6 +31,12 @@ app.use("/starwars", starwarsRouter);
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World.");
 });
+
+app
+  .use(middlewares.RequestLoggerHandler)
+  .all('*', middlewares.NotFoundHandler)
+  .use(middlewares.ErrorHandler);
+
 console.group();
 console.log(`PORT: ${ PORT }`);
 console.log(`HOST: ${ HOST }`);
