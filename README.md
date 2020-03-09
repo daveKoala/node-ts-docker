@@ -51,3 +51,7 @@ Because port 27017 is exposed you can connect to the MongoDB instance with a GUI
 
 This set up does not use any authentication. A live instance the connection string will also include a username and
 password
+
+## ElasticSearch
+
+https://blog.logrocket.com/full-text-search-with-node-js-and-elasticsearch-on-docker/

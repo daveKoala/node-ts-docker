@@ -8,6 +8,7 @@ import helmet from "helmet";
 import middlewares from "./middleware";
 
 import { starwarsRouter } from "./services/starwars/starwars.router";
+import { loggerRouter } from "./services/logger/logger.router";
 
 const PORT = 8080;
 const HOST = "0.0.0.0";
@@ -25,7 +26,9 @@ app
   .use(bodyParser.json());
 
 // Routes
-app.use("/starwars", starwarsRouter);
+app
+  .use("/starwars", starwarsRouter)
+  .use("/logger", loggerRouter);
 
 // Test
 app.get("/", (req: Request, res: Response) => {
