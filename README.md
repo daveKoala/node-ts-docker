@@ -5,7 +5,7 @@
 ### Build
 
 ```
-docker build -t dave/node-backend .
+docker build -t strata-v2/logging-service .
 ```
 
 ### RUN (Docker Compose)
