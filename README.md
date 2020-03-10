@@ -55,3 +55,5 @@ password
 ## ElasticSearch
 
 https://blog.logrocket.com/full-text-search-with-node-js-and-elasticsearch-on-docker/
+
+https://www.youtube.com/watch?v=oPObRc8tHgQ&list=WL&index=47&t=1042s

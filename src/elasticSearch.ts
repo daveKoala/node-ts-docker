@@ -1,7 +1,20 @@
 "use strict"
 const { Client } = require("@elastic/elasticsearch")
-const client = new Client({ node: "http://elasticsearch:9200/", log: "trace" })
+export const client = new Client({ node: "http://elasticsearch:9200/", log: "trace" })
 export const test = async () => {
+  // Explicit Mapping
+  /**
+   * { "mappings": {
+   * "post": {
+   *  "title": { "type": "string", fields: { "en": {"type": "string", "analyzer": "english"}, "raw": { "type": "string", "index": "not_analyzed"}}},
+   *  "startDate": { "type": "date", "format": "E, dd MMM YYYY HH:mm:ss Z"}
+   * 
+   * }
+   * }}
+   * 
+   * 
+   * 
+   */
   // Let"s start by indexing some data
   await client.index({
     index: "game-of-thrones",
@@ -39,5 +52,6 @@ export const test = async () => {
       }
     }
   })
-  console.log(body.hits.hits)
+  // console.log(body.hits.hits)
+  return body;
 };
