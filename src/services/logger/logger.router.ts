@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction, response } from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { client } from "../../elasticSearch";
 export const loggerRouter = express.Router();
 
@@ -8,7 +8,7 @@ loggerRouter.get("/test", async (req: Request, resp: Response, next: NextFunctio
     body: {
       query: {
         match: {
-          quote: "winter"
+          quote: "dave"
         }
       }
     }
