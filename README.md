@@ -5,7 +5,7 @@
 ### Build
 
 ```
-docker build -t dave/node-backend .
+docker build -t dave/logger-test .
 ```
 
 ### RUN (Docker Compose)

@@ -12,7 +12,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@apollo/gateway": "^0.13.2",
     "@types/redis": "^2.8.14",
+    "apollo-server-express": "^2.11.0",
     "axios": "^0.19.2",
     "express": "^4.17.1",
     "redis": "^2.8.0"
