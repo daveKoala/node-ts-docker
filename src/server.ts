@@ -29,7 +29,7 @@ app.get("/", (req: Request, res: Response) => {
 try {
   const gateway = new ApolloGateway({
     serviceList: [
-      { name: 'users', url: 'http://localhost:61105/graphql' },
+      { name: 'users', url: 'http://localhost:61105/goal/graphql' },
       // more services
     ],
   });
@@ -47,4 +47,4 @@ try {
   console.error(err.message);
 }
 app.listen(PORT, HOST);
-console.log(`Running on: //${HOST}:${PORT}`);
+console.log(`Running on: //${ HOST }:${ PORT }`);
